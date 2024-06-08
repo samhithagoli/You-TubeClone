@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.3e2cd616.css",
+    "main.js": "/static/js/main.8d32e47c.js",
+    "static/js/453.13b4776d.chunk.js": "/static/js/453.13b4776d.chunk.js",
+    "static/media/utube.ico": "/static/media/utube.14acd297cbc3c3f25677.ico",
+    "index.html": "/index.html",
+    "main.3e2cd616.css.map": "/static/css/main.3e2cd616.css.map",
+    "main.8d32e47c.js.map": "/static/js/main.8d32e47c.js.map",
+    "453.13b4776d.chunk.js.map": "/static/js/453.13b4776d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3e2cd616.css",
+    "static/js/main.8d32e47c.js"
+  ]
+}

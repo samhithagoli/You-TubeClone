@@ -1,0 +1,6 @@
+.container_showvideogrid{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    
+}
