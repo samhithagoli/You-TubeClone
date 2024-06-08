@@ -41,7 +41,7 @@ function Videopage() {
                 <div className='video_display_screen_videopage'>
                      <video 
                      //src={`http://localhost:5500/${vv?.filePath}`} 
-                     src={`https://youtubeclone-7kja056mh-samhitha-golis-projects.vercel.app/${vv?.filePath}`}
+                     src={`https://you-tubeclone.onrender.com/${vv?.filePath}`}
                      className={'video_showvideo_videopage'}
                      controls
                      autoPlay
