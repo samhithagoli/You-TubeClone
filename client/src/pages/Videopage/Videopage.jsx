@@ -14,18 +14,25 @@ function Videopage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const CurrentUser = useSelector((state) => state?.currentUserReducer);
-  const vids = useSelector((state) => state.videoReducer || { data: [] });
+  const vids = useSelector((state) => state.videoReducer.data || []);
 
-  const vv = vids.data?.find((q) => q._id === vid) || null;
+
+  const vv = vids.find((q) => q._id === vid) || null;
   const commentsRef = useRef(null);
   useEffect(() => {
-    if (CurrentUser) {
-      dispatch(addToHistory({ videoId: vid, Viewer: CurrentUser?.result._id }));
-    }
-    dispatch(viewVideo({ id: vid }));
-  }, [CurrentUser, dispatch, vid]);
-
+    const fetchData = async () => {
+      try {
+        if (CurrentUser) {
+          await dispatch(addToHistory({ videoId: vid, Viewer: CurrentUser?.result._id }));
+        }
+        await dispatch(viewVideo({ id: vid }));
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
   
+    fetchData();
+  }, [CurrentUser, dispatch, vid]);
   return (
     <>
       <div className='container_videopage'>
