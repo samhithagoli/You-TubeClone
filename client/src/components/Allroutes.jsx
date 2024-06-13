@@ -14,6 +14,7 @@ import { Routes,
  import Videopage from "../pages/Videopage/Videopage.jsx"
  import Channel from '../pages/channel/Channel'
  import Search from '../pages/Search/Search.jsx'
+ import Createroom from '../pages/Createroom/Createroom.jsx'
 function Allroutes({ setEditCreateChannelbtn,setVidUploadPage }) {
   return (
     <Routes>
@@ -26,8 +27,9 @@ function Allroutes({ setEditCreateChannelbtn,setVidUploadPage }) {
         <Route path='/yourvideos' element={<Yourvideo />}/>
         <Route path='/videopage/:vid' element={<Videopage />}/>
         <Route path="/seacrh/:searchQuery" element={<Search />} />
+        <Route path='/createroom' element={<Createroom/>}/>
         <Route path='/channel/:Cid' element={
-
+          
         <Channel
         setVidUploadPage={setVidUploadPage}
         setEditCreateChannelbtn={setEditCreateChannelbtn}

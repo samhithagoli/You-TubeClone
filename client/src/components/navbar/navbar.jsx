@@ -12,11 +12,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import {login} from '../../actions/auth';
 import axios from 'axios'
 import Auth from '../../pages/Auth/Auth'
+import { MdOutlineMissedVideoCall } from "react-icons/md";
+import { Redirect, Route } from 'react-router-dom';
 
 function Navbar({toggleDrawer,setEditCreateChannelbtn}) {
 
   const [AuthBtn, setAuthBtn] = useState(false);
 
+  const currentTime = new Date().getHours();
+
+  const isVisible = currentTime >= 18 && currentTime < 24;
 
   //const CurrentUser=null;
   // const CurrentUser={
@@ -58,6 +63,8 @@ const dispatch= useDispatch();
         console.error('Error logging in with Google', error);
     }
 };
+
+
   return (
     <>
     <div className='container_navbar'>
@@ -77,7 +84,11 @@ const dispatch= useDispatch();
       </div>
       <SearchBar/>
       <RiVideoAddLine size={22} className={"vid_bell_Navbar"}/>
-      
+      {isVisible&&( <Link to={'/createroom'} className={"vid_bell_Navbar"}>
+        <MdOutlineMissedVideoCall size={27}  />
+      </Link>
+        
+        )}
       <IoMdNotificationsOutline size={22} className={"vid_bell_Navbar"}/>
       <div className='Auth_cont_Navbar'>
       {CurrentUser ? (
