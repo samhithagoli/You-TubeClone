@@ -85,15 +85,15 @@ const Control = ({
   duration,
   currentTime,
   onMouseSeekDown,
-  controlRef
+  controlRef,
+  playRate
 }) => {
   const classes = useStyles();
 
-
   return (
-    <div className="control_Container" ref ={controlRef}>
+    <div className="control_Container" ref={controlRef}>
       <div className="top_container">
-       
+        {/* You can add any additional controls or information here */}
       </div>
       <div className="mid__container">
         <div className="icon__btn" onDoubleClick={onRewind}>
@@ -138,11 +138,11 @@ const Control = ({
             </div>
 
             <div className="icon__btn" onClick={onMute}>
-            {mute ? (
-                  <VolumeOff fontSize="medium" />
-                ) : (
-                  <VolumeUp fontSize="medium" />
-                )}
+              {mute ? (
+                <VolumeOff fontSize="medium" />
+              ) : (
+                <VolumeUp fontSize="medium" />
+              )}
             </div>
 
             <Slider
@@ -152,9 +152,9 @@ const Control = ({
               onChangeCommitted={onVolumeSeekUp}
             />
 
-            <span>{ currentTime} : {duration}</span>
+            <span>{currentTime} / {duration}</span>
+            <span>Speed: {playRate}x</span>
           </div>
-          
         </div>
       </div>
     </div>

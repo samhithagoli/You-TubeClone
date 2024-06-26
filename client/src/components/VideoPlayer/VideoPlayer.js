@@ -18,14 +18,14 @@ function VideoPlayer({ videoSrc }) {
     seeking: false,
     buffer: true,
   });
-  
+
   const [location, setLocation] = useState(null);
   const [temperature, setTemperature] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
 
   let count = 0;
+  let playbackRateTimeout = useRef(null);
 
-  //Destructuring the properties from the videoState
   const { playing, muted, volume, playbackRate, played, seeking, buffer } = videoState;
 
   const currentTime = videoPlayerRef.current ? videoPlayerRef.current.getCurrentTime() : 0;
@@ -42,14 +42,14 @@ function VideoPlayer({ videoSrc }) {
     videoPlayerRef.current.seekTo(videoPlayerRef.current.getCurrentTime() - 5);
   };
 
-  const handleFastFoward = () => {
+  const handleFastForward = () => {
     videoPlayerRef.current.seekTo(videoPlayerRef.current.getCurrentTime() + 10);
   };
 
   const progressHandler = (state) => {
     if (count > 3) {
-      controlRef.current.style.visibility = "hidden"; // toggling player control container
-    } else if (controlRef.current.style.visibility === "visible") {
+      controlRef.current.style.visibility = 'hidden'; // toggling player control container
+    } else if (controlRef.current.style.visibility === 'visible') {
       count += 1;
     }
 
@@ -97,7 +97,7 @@ function VideoPlayer({ videoSrc }) {
   };
 
   const mouseMoveHandler = () => {
-    controlRef.current.style.visibility = "visible";
+    controlRef.current.style.visibility = 'visible';
     count = 0;
   };
 
@@ -116,10 +116,10 @@ function VideoPlayer({ videoSrc }) {
         `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`
       );
       const data = await response.json();
-      
+
       // Log the entire response to understand its structure
       console.log('Weather API response:', data);
-  
+
       if (data && data.main && typeof data.main.temp !== 'undefined') {
         setTemperature(data.main.temp);
         setLocation(data.name);
@@ -134,7 +134,6 @@ function VideoPlayer({ videoSrc }) {
       setLocation('Unknown');
     }
   };
-  
 
   const handleTopRightTap = () => {
     if (navigator.geolocation) {
@@ -145,14 +144,36 @@ function VideoPlayer({ videoSrc }) {
         setTimeout(() => setShowPopup(false), 3000); // Hide popup after 3 seconds
       });
     } else {
-      console.log("Geolocation is not supported by this browser.");
+      console.log('Geolocation is not supported by this browser.');
     }
+  };
+
+  const handleMouseDown = (e) => {
+    const { clientX } = e;
+    const { width } = e.target.getBoundingClientRect();
+    if (clientX < width / 2) {
+      setVideoState((prevState) => ({ ...prevState, playbackRate: 0.5 }));
+    } else {
+      setVideoState((prevState) => ({ ...prevState, playbackRate: 2.0 }));
+    }
+  };
+
+  const handleMouseUp = () => {
+    clearTimeout(playbackRateTimeout.current);
+    playbackRateTimeout.current = setTimeout(() => {
+      setVideoState((prevState) => ({ ...prevState, playbackRate: 1.0 }));
+    }, 100);
   };
 
   return (
     <div className="video_container">
       <Container maxWidth="md" justify="center">
-        <div className="player__wrapper" onMouseMove={mouseMoveHandler}>
+        <div
+          className="player__wrapper"
+          onMouseMove={mouseMoveHandler}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+        >
           <ReactPlayer
             ref={videoPlayerRef}
             className="player"
@@ -162,6 +183,7 @@ function VideoPlayer({ videoSrc }) {
             playing={playing}
             volume={volume}
             muted={muted}
+            playbackRate={playbackRate}
             onProgress={progressHandler}
             onBuffer={bufferStartHandler}
             onBufferEnd={bufferEndHandler}
@@ -174,7 +196,7 @@ function VideoPlayer({ videoSrc }) {
             onPlayPause={playPauseHandler}
             playing={playing}
             onRewind={rewindHandler}
-            onForward={handleFastFoward}
+            onForward={handleFastForward}
             played={played}
             onSeek={seekHandler}
             onSeekMouseUp={seekMouseUpHandler}
