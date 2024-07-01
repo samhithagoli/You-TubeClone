@@ -11,7 +11,7 @@
 }
 
 .player {
-   border: 2px solid white;
+   border: 2px solid rgb(0, 0, 0);
    object-fit: cover;
    padding: 0;
    margin: 0;
