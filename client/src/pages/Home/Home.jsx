@@ -9,8 +9,8 @@ export default function Home() {  // Changed 'home' to 'Home'
   const dispatch = useDispatch();
   const vids=useSelector(state=>state.videoReducer)?.data?.filter(q=>q).reverse();
   const NavList = [
-    "All", "Python", "Java", "c++", "Animation", "Movies",
-    "Science", "Gaming", "Comedy"
+    "All","Live", "Python", "Java", "c++", "Animation", "Movies",
+    "Science", "Gaming", "Comedy","Music", "Gaming","New to you","Posts"
   ];
   useEffect(() => {
     dispatch(getAllVideo());

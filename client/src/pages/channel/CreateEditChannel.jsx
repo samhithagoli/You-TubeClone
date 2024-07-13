@@ -22,7 +22,7 @@ const dispatch=useDispatch();
    if(!name){
     alert("Plz enter name!");
    }
-   else if(desc){
+   else if(!desc){
     alert("plz enter description !");
    }
    else{
@@ -39,11 +39,12 @@ const dispatch=useDispatch();
   return (
     <div className='container_CreateEditChannel'>
     <input
-    onClick={()=>setEditCreateChannelbtn(false)}
+    
     type='submit'
     name='text'
     value={"X"}
     className='ibtn_x'
+    onClick={()=>setEditCreateChannelbtn(false)}
     />
     <div className='container2_CreateEditChannel'>
     <h1>

@@ -75,7 +75,7 @@ const dispatch= useDispatch();
         <p></p>
        </div>
       <Link to={'/'} className='logo_ div_navbar'>
-        <img className="image" src={logo} alt=""/>
+       <img className="image" src={logo} alt=""/>
         
 
       </Link>
@@ -84,7 +84,7 @@ const dispatch= useDispatch();
       </div>
       <SearchBar/>
       <RiVideoAddLine size={22} className={"vid_bell_Navbar"}/>
-      {isVisible&&( <Link to={'/createroom'} className={"vid_bell_Navbar"}>
+      {( <Link to={'/createroom'} className={"vid_bell_Navbar"}>
         <MdOutlineMissedVideoCall size={27}  />
       </Link>
         
